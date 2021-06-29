@@ -15,6 +15,12 @@ cd PATHSUP_young_scholarAR
 # depending on your OS or what bash you are using try one of these to visualize what is in the directory
 ls
 dir
+
+# i'm actually not sure if you need a github account for this step, but its good to have one in the future
+# before you make any changes, you'll need to tell the repo who you are by running these two commands
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+
 -------------------------------------------------------------------------
 
 ----------------------OTHER TIMES----------------------------------------
