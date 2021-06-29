@@ -1,0 +1,48 @@
+GIT TUTORIAL (or just some commands to get you started)
+This is assuming you have git installed and are in the git bash (or something that supports git)
+As a note, if you look up these things online, they also may have some added arguments like "origin master" - don't worry about these for now
+
+----------------------FIRST TIME-----------------------------------------
+# first navigate to the folder where you want to download the reposoitory
+cd <path to your folder>
+
+# to download the remote repository for the first time
+git clone https://github.com/araghuram3/PATHSUP_young_scholarAR.git
+
+# change into the directory to observe whats in the folder
+cd PATHSUP_young_scholarAR
+
+# depending on your OS or what bash you are using try one of these to visualize what is in the directory
+ls
+dir
+-------------------------------------------------------------------------
+
+----------------------OTHER TIMES----------------------------------------
+# when you are in the folder, it should say (master) in the terminal prompt
+
+# before you start working, it is good practice to always pull/download code
+# if someone else was working while you weren't, you want to make sure you download 
+# their changes before making your own - for this project, it shouldn't be a big 
+# deal between members because you will each be working with your own file; however,
+# you'd want to download my changes before you started working
+git pull
+
+# check the status of git folder
+git status
+
+# after you have made changes, checking the status should show some files in red if they contain changes
+# to add this to your next "locally saved version"/commit, either add the single file or add all changes
+git add <your file> 
+git add . # add all changes
+
+# once you have added changes, the changes to be logged in the next commit are shown in green when you use "git status"
+# then commit these changes to make a locally saved version. you always need to include a message - it helps to be succinct about 
+# what changes were made in this commit (example: "implemented KNN algorithm", "added plotting for comparison")
+git commit -m "<your message goes here>"
+
+# once you have commited changes, they are now locally in your version control so you can now go back to older versions and then come back to this one
+# to push or upload the changes to the remote repository on github.com (so other people can see the changes), push the changes
+git push
+--------------------------------------------------------------------------
+
+If you encounter any issues, let me know - it sometimes gets a bit tricky. 
