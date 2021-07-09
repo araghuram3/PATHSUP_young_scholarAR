@@ -1,4 +1,11 @@
 import numpy as np
+import os
+# from statistics import NormalDist
+url='https://raw.githubusercontent.com/python/cpython/3.8/Lib/statistics.py'
+
+import urllib.request 
+urllib.request.urlretrieve(url, os.path.basename(url)) 
+from statistics import *
 
 def calcAccuracy(predictions, labels):
 	# two methods to evaluate accuracy
@@ -28,8 +35,29 @@ print('Loaded datasets')
 data = datasets.load_breast_cancer()
 
 # Store the feature data
-X = data.data# store the target data
-y = data.target# split the data using Scikit-Learn's train_test_split
+X = data.data # store the target data
+y = data.target # split the data using Scikit-Learn's train_test_split
+
+inds_0 = y == 0
+x_0 = X[inds_0, :]
+x_1 = X[~inds_0, :]
+
+mean_x0 = np.mean(x_0, axis=0)
+mean_x1 = np.mean(x_1, axis=0)
+var_x0 = np.var(x_0, axis=0)
+var_x1 = np.var(x_1, axis=0)
+for ind in range(len(mean_x0)):
+	overlap = NormalDist(mu=mean_x0[ind], sigma=np.sqrt(var_x0[ind])).overlap(NormalDist(mu=mean_x1[ind], sigma=np.sqrt(var_x1[ind])))
+	print("Param ", str(ind), "overlap:", str(overlap))
+
+print("x_0 size: ", x_0.shape)
+print("x_1 size: ", x_1.shape)
+
+
+param_inds = range(20)
+print("Params to use: ", str([ind for ind in param_inds]))
+
+
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y)
 
