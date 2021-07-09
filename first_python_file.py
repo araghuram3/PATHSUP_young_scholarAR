@@ -39,6 +39,7 @@ print(data.feature_names)
 X = data.data # store the target data
 y = data.target # split the data using Scikit-Learn's train_test_split
 
+################ new stuff ##########################
 inds_0 = y == 0
 x_0 = X[inds_0, :]
 x_1 = X[~inds_0, :]
@@ -60,7 +61,7 @@ print("Params to use: ", str([ind for ind in param_inds]))
 X = X[:, param_inds]
 
 print("Shape of X originally is: ", X.shape)
-
+####################################################
 
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y)
