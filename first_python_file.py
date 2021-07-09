@@ -1,11 +1,11 @@
 import numpy as np
-import os
-# from statistics import NormalDist
-url='https://raw.githubusercontent.com/python/cpython/3.8/Lib/statistics.py'
+# import os
+# url='https://raw.githubusercontent.com/python/cpython/3.8/Lib/statistics.py'
+# import urllib.request 
+# urllib.request.urlretrieve(url, os.path.basename(url)) 
+# from statistics import *
 
-import urllib.request 
-urllib.request.urlretrieve(url, os.path.basename(url)) 
-from statistics import *
+from statistics import NormalDist
 
 def calcAccuracy(predictions, labels):
 	# two methods to evaluate accuracy
