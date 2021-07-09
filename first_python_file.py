@@ -33,6 +33,7 @@ print('Loaded datasets')
 
 # load our breastcancer dataset
 data = datasets.load_breast_cancer()
+print(data.feature_names)
 
 # Store the feature data
 X = data.data # store the target data
@@ -48,14 +49,17 @@ var_x0 = np.var(x_0, axis=0)
 var_x1 = np.var(x_1, axis=0)
 for ind in range(len(mean_x0)):
 	overlap = NormalDist(mu=mean_x0[ind], sigma=np.sqrt(var_x0[ind])).overlap(NormalDist(mu=mean_x1[ind], sigma=np.sqrt(var_x1[ind])))
-	print("Param ", str(ind), "overlap:", str(overlap))
+	print("Param", str(ind),  data.feature_names[ind], ":", str(overlap))
 
-print("x_0 size: ", x_0.shape)
-print("x_1 size: ", x_1.shape)
+# print("x_0 size: ", x_0.shape)
+# print("x_1 size: ", x_1.shape)
 
-
-param_inds = range(20)
+# param_inds = [27, 20, 22, 7, 2, 3, 23, 0, 12, 13] # good params
+param_inds = [14, 11, 8, 21, 18, 17, 11, 9, 4, 28] # bad params
 print("Params to use: ", str([ind for ind in param_inds]))
+X = X[:, param_inds]
+
+print("Shape of X originally is: ", X.shape)
 
 
 from sklearn.model_selection import train_test_split
