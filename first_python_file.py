@@ -1,4 +1,6 @@
 import numpy as np
+import matplotlib.pyplot as plt
+
 # import os
 # url='https://raw.githubusercontent.com/python/cpython/3.8/Lib/statistics.py'
 # import urllib.request 
@@ -48,15 +50,24 @@ mean_x0 = np.mean(x_0, axis=0)
 mean_x1 = np.mean(x_1, axis=0)
 var_x0 = np.var(x_0, axis=0)
 var_x1 = np.var(x_1, axis=0)
+overlap_vec = []
 for ind in range(len(mean_x0)):
 	overlap = NormalDist(mu=mean_x0[ind], sigma=np.sqrt(var_x0[ind])).overlap(NormalDist(mu=mean_x1[ind], sigma=np.sqrt(var_x1[ind])))
+	overlap_vec.append(overlap)
 	print("Param", str(ind),  data.feature_names[ind], ":", str(overlap))
 
 # print("x_0 size: ", x_0.shape)
 # print("x_1 size: ", x_1.shape)
 
-# param_inds = [27, 20, 22, 7, 2, 3, 23, 0, 12, 13] # good params
-param_inds = [14, 11, 8, 21, 18, 17, 11, 9, 4, 28] # bad params
+plt.plot(range(len(overlap_vec)),overlap_vec)
+plt.xlabel('Parameter',fontname='times new roman')
+plt.ylabel('Overlap',fontname='times new roman')
+plt.yticks(fontname = "Times New Roman") 
+plt.xticks(fontname = "Times New Roman") 
+plt.show()
+
+param_inds = [27, 20, 22, 7, 2, 3, 23, 0, 12, 13] # good params
+# param_inds = [14, 11, 8, 21, 18, 17, 11, 9, 4, 28] # bad params
 print("Params to use: ", str([ind for ind in param_inds]))
 X = X[:, param_inds]
 
@@ -67,8 +78,29 @@ from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y)
 
 from sklearn.neighbors import KNeighborsClassifier
-logreg = KNeighborsClassifier(n_neighbors=6)
-logreg.fit(X_train, y_train)
-predictions = logreg.predict(X_test)
+knn_param_vec = []
+params = range(2,20)
+for p in params:
 
-print(calcAccuracy(predictions, y_test))
+	logreg = KNeighborsClassifier(n_neighbors=p)
+	logreg.fit(X_train, y_train)
+	predictions = logreg.predict(X_test)
+	knn_param_vec.append(calcAccuracy(predictions, y_test))
+
+fontsize = 14
+fontname = 'times new roman'
+
+plt.plot(params,knn_param_vec)
+plt.xlabel('Number of neighbors',fontname=fontname,fontsize=fontsize)
+plt.ylabel('Accuracy',fontname=fontname,fontsize=fontsize)
+plt.yticks(fontname=fontname,fontsize=fontsize) 
+plt.xticks(fontname=fontname,fontsize=fontsize) 
+plt.show()
+
+
+plt.bar(range(3),np.array(knn_param_vec[0:3]),tick_label=["0","1","2"])
+plt.xlabel('Number of neighbors',fontname=fontname,fontsize=fontsize)
+plt.ylabel('Accuracy',fontname=fontname,fontsize=fontsize)
+plt.yticks(fontname=fontname,fontsize=fontsize) 
+plt.xticks(fontname=fontname,fontsize=fontsize) 
+plt.show()
